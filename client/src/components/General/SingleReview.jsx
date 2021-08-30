@@ -73,7 +73,7 @@ function Review(prop) {
             body: JSON.stringify({x:"x"})
         })         
         .then(response => {
-            window.location.href = "http://localhost:3000/"+prop.type+"s";
+            window.location.href = "https://sadrachreviews.herokuapp.com/"+prop.type+"s";
         })  
         .catch(err => console.log(err));
     };
