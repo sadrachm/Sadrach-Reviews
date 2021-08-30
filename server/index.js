@@ -28,6 +28,7 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 app.use(express.static(path.resolve(__dirname, '../client/public')));
+app.use(express.static(path.resolve(__dirname, '../client/src')));
 
 // General API post and get
 
