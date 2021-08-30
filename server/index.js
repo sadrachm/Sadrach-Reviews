@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3001;
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const _ = require("lodash");
+// const _ = require("lodash");
 const path = require('path');
 const app = express();
 
