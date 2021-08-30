@@ -27,8 +27,8 @@ const itemsSchema = {
 
 const Item = mongoose.model("Item", itemsSchema);
 
-app.use(express.static(path.resolve(__dirname, '../client/public')));
-app.use(express.static(path.resolve(__dirname, '../client/src')));
+
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 // General API post and get
 
@@ -280,10 +280,10 @@ app.get("/api/:id", (req, res) => {
     
 // });
 
-// All other GET requests not handled before will return our React app
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
-// });
+//All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
