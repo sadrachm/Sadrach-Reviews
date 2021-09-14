@@ -8,14 +8,23 @@
     color: white;
     font-family: 'PT Sans', sans-serif;        
 }
+.cardTitle {
+  
+  text-decoration: underline;
+  text-decoration-color: rgb(160, 219, 255);
+}
 .contain {
     text-align: center;
-    max-height: 340px;
+    max-height: 400px;
+}
+.back {
+  margin-left: 10px;
+  margin-top: 10px;
 }
 .inputs {
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-align: center;
-  width: 60%;
+  width: 95%;
   margin-top: 30px;
 }
 .review {
@@ -52,6 +61,9 @@
     text-align: center;
     font-family: 'Merriweather', serif;
     font-size: 2rem;
+}
+.classTitle {
+  font-size: 1rem;
 }
 
 .singleReview {
@@ -127,7 +139,11 @@
       font-size: 5rem;
     }
     .singleReview {
-      width: 85%
+      width: 80%
+    }
+    .inputs {
+      width:80%;
+      font-size: 1.2rem;
     }
     .box {
       grid-template-areas:
@@ -141,6 +157,10 @@
   @media only screen and (min-width: 1300px) {
     .singleReview {
       width: 70%
+    }
+    .inputs {
+      width:60%;
+      font-size: 1.3rem;
     }
     .box {
       grid-template-areas:

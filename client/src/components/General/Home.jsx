@@ -1,6 +1,31 @@
+import React, {useState} from 'react';
+import Animes from '../Anime/Animes.jsx';
+import Games from '../Game/Games.jsx';
+import Movies from '../Movie/Movies.jsx';
+
 function Home() {
+    const [toggle, setToggle] = useState(false);
+    const [words, setWords] = useState("Make Me Ugly");
+    const [type, setType] = useState({game:true, anime:true, movie: true}); //0 = Game, 1 = Anime, 2 = Movie
+    function toggleEdit() {
+        setToggle(!toggle);
+        setWords(!toggle ? "Make me Cute" : "Make me Ugly")
+    };
+    function toggleType(event) {
+        const name = event.target.name;
+        setType(prev => {
+            return {
+              ...prev,
+              [name]: !prev[name]
+            };
+          });
+    };
+
     return <>
-        <h1 className="title">Hola</h1>
+        <button className="composeButton mx-auto mt-5" style={{display:"block"}}onClick={toggleEdit} >{words}</button>
+            
+        {toggle && 
+        <><h1 className="title">Hello</h1>
         <p className="mx-auto" style= {{width:"70%"}}>Welcome to my React Project. This web page will be a practice project 
         expositioning some of my knowledge in the React framework. This does not mean
         that I will not actually put reviews and opinions on games and shows that I place here. 
@@ -50,8 +75,32 @@ function Home() {
                 could be used for good or for evil. To not make this long I'm going to leave it at that. Sorry. LOL. Maybe I'll make a review 
                 on Spiderman 3 and go more in depth. </p>
             </div>
+        </div></>}
+        <div className="mt-5 " style={{ textAlign: "center"}}>
+            <div className="form-check-inline">
+                <input class="form-check-input " style={{marginRight:"10px"}} onClick={toggleType} type="checkbox" value="zxc" id="games" name="game" checked={type.game}></input>
+                <label class="form-check-label " for="games">
+                    Games
+                </label>
+            </div>
+            <div className ="form-check-inline">
+                <input class="form-check-input ml-3" style={{marginRight:"10px"}} onClick={toggleType} type="checkbox" value="qwe" id="animes" name="anime" checked={type.anime}></input>
+                <label class="form-check-label" for="animes">
+                    Animes
+                </label>
+            </div>
+            <div className ="form-check-inline">
+                <input class="form-check-input" style={{marginRight:"10px"}} onClick={toggleType} type="checkbox" value="asd" id="movies" name="movie" checked={type.movie}></input>
+                <label class="form-check-label" for="movies">
+                    Movies
+                </label>
+            </div>
         </div>
- </>
+    {type.game && <Games />}
+    {type.anime && <Animes />}
+    {type.movie && <Movies />}
+    {!type.game && !type.anime && !type.movie && <h1 className="title" >So Lonely</h1>}
+</>
 }
 
 export default Home;

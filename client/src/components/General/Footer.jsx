@@ -46,7 +46,7 @@ function Footer() {
   {/* <!-- Footer Elements --> */}
 
   {/* <!-- Copyright --> */}
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
     <a href="https://sadrachm.github.io/MySite/"> Sadrach Martinez</a>
   </div>
   {/* <!-- Copyright --> */}

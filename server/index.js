@@ -22,7 +22,8 @@ const itemsSchema = {
   imgURL: String,
   title: String,
   type: String,
-  content: String
+  content: String,
+  rating: Number
 };
 
 const Item = mongoose.model("Item", itemsSchema);
@@ -45,12 +46,14 @@ app.route("/api")
   let type = req.body.type;
   let content = req.body.content;
   let imgURL = req.body.imgURL;
+  let rating = req.body.rating;
   const item = new Item({
       id: id,
       title: title,
       type:type,
       content: content,
-      imgURL: imgURL
+      imgURL: imgURL,
+      rating: rating
   });
   item.save();
   res.send("/")
@@ -79,20 +82,25 @@ app.route("/api/anime/:id").get((req, res) => {
     } else {      
       let query = {$set: {}};
       for (let key in req.body) {
-        if (found[key] && found[key] !== req.body[key]){ // if the field we have in req.body exists, we're gonna update it          
-        query.$set[key] = req.body[key];
+        // if (found[key] && found[key] !== req.body[key]){ // if the field we have in req.body exists, we're gonna update it          
+        if (key === "rating" && req.body[key] < 11) {
+          query.$set[key] = req.body[key];
+        } else if (key=== "rating") {
+          query.$set[key] = found[key];
+        } else {          
+          query.$set[key] = req.body[key];
         }
+        // }
       }  
       console.log(query);
       Item.updateOne({type:"anime", id:id}, query, (err, docs) => {
-        // err ? console.log(err) : console.log("Succsfully updated : ", docs);
+         //err ? console.log(err) : console.log("Succsfully updated : ", docs);
       res.send({success: true});
       });
     }
   });
 })
 .delete((req, res) => {
-  console.log("IM IN")
   const id = req.params.id;
   Item.deleteOne({type:"anime", id:id}, function (err) {
     if (err) console.log(err);
@@ -123,8 +131,12 @@ app.route("/api/game/:id").get((req, res) => {
     } else {      
       let query = {$set: {}};
       for (let key in req.body) {
-        if (found[key] && found[key] !== req.body[key]){ // if the field we have in req.body exists, we're gonna update it          
-        query.$set[key] = req.body[key];
+        if (key === "rating" && req.body[key] < 11) {
+          query.$set[key] = req.body[key];
+        } else if (key=== "rating") {
+          query.$set[key] = found[key];
+        } else {          
+          query.$set[key] = req.body[key];
         }
       }  
       console.log(query);
@@ -167,8 +179,12 @@ app.route("/api/movie/:id").get((req, res) => {
     } else {      
       let query = {$set: {}};
       for (let key in req.body) {
-        if (found[key] && found[key] !== req.body[key]){ // if the field we have in req.body exists, we're gonna update it          
-        query.$set[key] = req.body[key];
+        if (key === "rating" && req.body[key] < 11) {
+          query.$set[key] = req.body[key];
+        } else if (key=== "rating") {
+          query.$set[key] = found[key];
+        } else {          
+          query.$set[key] = req.body[key];
         }
       }  
       console.log(query);

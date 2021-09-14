@@ -23,6 +23,7 @@ function Card(prop) {
         }
     }
     return <div className="contain"> 
+    <h3 className=" mb-3 cardTitle">{prop.title}</h3>
     <div onClick={link} style={{display:"inline"}} onMouseEnter={handleOver} onMouseLeave={handleOut}>
         <img className="hideMe" style={brightness} src={prop.imgURL} alt={" " + prop.title} ></img>
         {isOver && <div className="centered" ><p >{prop.title}</p></div>}
