@@ -75,6 +75,7 @@ app.route("/api/anime/:id").get((req, res) => {
 })
 .patch((req, res) => {
   const id = req.params.id;
+  const addToContent = req.body.append;
   Item.findOne({type:"anime", id:id}, (err, found) => {
     console.log(req.body);
     if (found.length===0) {
@@ -87,12 +88,14 @@ app.route("/api/anime/:id").get((req, res) => {
           query.$set[key] = req.body[key];
         } else if (key=== "rating") {
           query.$set[key] = found[key];
+        } else if (key === "content" && addToContent) {
+          query.$set[key] = found[key] + " " + req.body[key]
         } else {          
           query.$set[key] = req.body[key];
         }
         // }
       }  
-      console.log(query);
+     // console.log(query);
       Item.updateOne({type:"anime", id:id}, query, (err, docs) => {
          //err ? console.log(err) : console.log("Succsfully updated : ", docs);
       res.send({success: true});
@@ -124,6 +127,7 @@ app.route("/api/game/:id").get((req, res) => {
 })
 .patch((req, res) => {
   const id = req.params.id;
+  const addToContent = req.body.append;
   Item.findOne({type:"game", id:id}, (err, found) => {
     console.log(req.body);
     if (found.length===0) {
@@ -135,6 +139,8 @@ app.route("/api/game/:id").get((req, res) => {
           query.$set[key] = req.body[key];
         } else if (key=== "rating") {
           query.$set[key] = found[key];
+        } else if (key === "content" && addToContent) {
+          query.$set[key] = found[key] + " " + req.body[key]
         } else {          
           query.$set[key] = req.body[key];
         }
@@ -172,6 +178,7 @@ app.route("/api/movie/:id").get((req, res) => {
 })
 .patch((req, res) => {
   const id = req.params.id;
+  const addToContent = req.body.append;
   Item.findOne({type:"movie", id:id}, (err, found) => {
     console.log(req.body);
     if (found.length===0) {
@@ -183,6 +190,8 @@ app.route("/api/movie/:id").get((req, res) => {
           query.$set[key] = req.body[key];
         } else if (key=== "rating") {
           query.$set[key] = found[key];
+        } else if (key === "content" && addToContent) {
+          query.$set[key] = found[key] + " " + req.body[key]
         } else {          
           query.$set[key] = req.body[key];
         }

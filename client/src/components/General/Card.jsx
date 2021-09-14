@@ -27,7 +27,7 @@ function Card(prop) {
     <div onClick={link} style={{display:"inline"}} onMouseEnter={handleOver} onMouseLeave={handleOut}>
         <img className="hideMe" style={brightness} src={prop.imgURL} alt={" " + prop.title} ></img>
         {isOver && <div className="centered" ><p >{prop.title}</p></div>}
-        {isOver && <div className="centered" ><p >{prop.content}</p></div>}              
+        {isOver && <div className="centered" ><p >{prop.content.replace("***", " ")}</p></div>}              
         </div>
          {!isOver && <div className="hide">{prop.title}</div>}
         {!isOver && <div className="hide">{prop.content}</div>}
