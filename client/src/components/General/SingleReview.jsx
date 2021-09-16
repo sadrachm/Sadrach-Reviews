@@ -99,7 +99,9 @@ function Review(prop) {
     function contentCreator() {
         const result = item[0].content.split("***");
         return result.map(element => {
-            return <h2 style = {{textAlign:"left", marginLeft: "20%", width:"60%"}}><span style={{marginLeft:"40px"}}>{element.substring(0,1)}</span>{element.substring(1)}</h2>
+            return <div style = {{textAlign:"center", position:"block"}}>
+                <h2 style = {{textAlign:"left", marginLeft: "20%", width:"60%"}}><span style={{marginLeft:"40px"}}>{element.substring(0,1)}</span>{element.substring(1)}</h2>
+            </div>
         })
     }
     React.useEffect(() => {
