@@ -6,7 +6,7 @@ import { Route, Redirect, useParams } from "react-router-dom"; //eslint-disable-
 function Review(prop) { 
     const [toggle, setToggle] = useState(false);
     const [changes, setChanges] = useState({
-        content: [],
+        content: "",
         title: "",
         imgURL: "",
         rating: "",
@@ -19,9 +19,28 @@ function Review(prop) {
 
     function edit(event) {
         let dict = {};
+        let newContent = "";
+        let value = "";
+        for (let x in changes.content) {
+            let y = changes.content[x].match(/(\r\n|\n|\r)/gm)
+            if (y) {
+                value = "***";
+            } else {
+                value = changes.content[x];
+            }
+            newContent += value; 
+        }        
+        setChanges(prev => {
+            return {
+              ...prev,
+              ["content"]: newContent
+            };
+          });
         for (let change in changes) {
             if (change === "append") {
                 dict[change] = changes[change]
+            } else if (change === "content" && changes[change].length != "" && changes[change] != 0) {
+                dict[change] = newContent;
             } else if (changes[change].length != "" && changes[change] != 0) {
                 dict[change] = changes[change];
             }
@@ -52,11 +71,11 @@ function Review(prop) {
 
     function handleChange(event) {
         let {name, value} = event.target;
-        let x = value.substring(value.length-1).match(/(\r\n|\n|\r)/gm)
-        if (x) {
-            value = value.substring(0,value.length) + "***";
-        }
-        console.log(value);
+        // let x = value.substring(value.length-1).match(/(\r\n|\n|\r)/gm)
+        // if (x) {
+        //     value = value.substring(0,value.length) + "***";
+        // }
+        // console.log(value);
         setChanges(prev => {
             return {
               ...prev,
@@ -100,7 +119,8 @@ function Review(prop) {
         const result = item[0].content.split("***");
         return result.map(element => {
             return <div style = {{textAlign:"center", position:"block"}}>
-                <h2 style = {{textAlign:"left", marginLeft: "20%", width:"60%"}}><span style={{marginLeft:"40px"}}>{element.substring(0,1)}</span>{element.substring(1)}</h2>
+                <h2 class = "content" style = {{textAlign:"left", margin: "auto", padding: "auto"}}><span style={{marginLeft:"40px"}}>{element.substring(0,1)}</span>{element.substring(1)}</h2>
+                <br></br>
             </div>
         })
     }
@@ -140,6 +160,7 @@ function Review(prop) {
                 <button className="composeButton space" onClick={edit}>Send</button>
                 <button className="composeButton space" onClick={reset}>Reset</button> 
                 <button className="composeButton danger space" onClick={erase}>Delete</button> 
+
             </form>}
 
         </div></>

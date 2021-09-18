@@ -4,15 +4,21 @@ function Compose() {
     const [inputs, setInputs] = useState({
         title:"",
         content:"",
-        imgURL:"",
+        imgURL:"https://i.ibb.co/N9NVyWG/2551234.jpg",
         type:"",
+        rating:""
 
     });
 
-    // const [imgURL, setImgURL] = useState('');
-    // const [title, setTitle] = useState('');
-    // const [content, setContent] = useState('');
     function Send() {
+        // if (inputs.imgURL === "") {
+        //     setInputs(prev => {
+        //         return {
+        //           ...prev,
+        //           ["imgURL"]: "https://i.ibb.co/N9NVyWG/2551234.jpg"
+        //         };
+        //       });
+        // }
         fetch("/api/compose", {  
             method: "POST", 
             headers: {
@@ -23,8 +29,6 @@ function Compose() {
         .then(response => {
             console.log(response.status)
         })  
-        // // .then(res => res.text())
-        // .then(data => console.log(data))
         .catch(err => console.log(err));
     }
 
@@ -37,26 +41,13 @@ function Compose() {
               [name]: value
             };
           });
-        // switch (name) {
-        //     case 'imgURL':
-        //         setImgURL(value);
-        //         break;
-        //     case 'content':
-        //         setContent(value);
-        //         break;
-        //     case 'title':
-        //         setTitle(value);
-        //         break;
-        //     default:
-        //       console.log(`Sorry, we are out of ${name}.`);
-        //   }
           
     };
     return <> <h1 className="title">New Review</h1>
         <form>
             <div className="review" style={{marginTop:"50px", textAlign:"center"}}>
                 <div class="form-check form-check-inline">
-                    <input  onChange={handleChange} class="form-check-input" type="radio" name="type" id="game" value="game" ></input>
+                    <input  onChange={handleChange} class="form-check-input" type="radio" name="type" id="game" value="game" required ></input>
                     <label class="form-check-label" for="game">
                         Game
                     </label>
@@ -80,9 +71,10 @@ function Compose() {
                     </label>
                 </div>
             <br></br> 
-            <input className="inputs" onChange={handleChange} type="text" name="title" value={inputs.title} placeholder="title"></input>
-            <br></br><textarea className="inputs" onChange={handleChange} rows="3" type="text" name="content" value={inputs.content} placeholder="content"></textarea>
-            <br></br><textarea className="inputs" onChange={handleChange} rows="3" type="text" name="imgURL" value={inputs.imgURL} placeholder="image URL"></textarea>
+            <input className="inputs" onChange={handleChange} type="text" name="title" value={inputs.title} placeholder="Title" required></input>
+            <br></br><textarea className="inputs" onChange={handleChange} rows="3" type="text" name="content" value={inputs.content} placeholder="Content" required></textarea>
+            <br></br><textarea className="inputs" onChange={handleChange} rows="3" type="text" name="imgURL" value={inputs.imgURL} placeholder="Image URL"></textarea>
+            <br></br><textarea className="inputs" onChange={handleChange} rows="1" type="number" min= "0" max = "10" name="rating" value={inputs.rating} placeholder="Rating" required></textarea>
             <br></br>
             <button className="composeButton" onClick={Send}>Send</button>
             </div>

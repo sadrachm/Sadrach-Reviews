@@ -17,6 +17,10 @@
     text-align: center;
     max-height: 400px;
 }
+.content {
+  width:85%
+}
+
 .back {
   margin-left: 10px;
   margin-top: 10px;
@@ -74,8 +78,8 @@
 
   img {
       border-radius: 10%;
-      min-width: 300px;
-      min-height: 300px;
+      width: 300px;
+      height: 300px;
   }
 
   /* Centered text */
@@ -145,6 +149,9 @@
       width:80%;
       font-size: 1.2rem;
     }
+    .content {
+      width: 80%;
+    }
     .box {
       grid-template-areas:
       'one two three';
@@ -161,6 +168,9 @@
     .inputs {
       width:60%;
       font-size: 1.3rem;
+    }
+    .content {
+      width: 70%;
     }
     .box {
       grid-template-areas:

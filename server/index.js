@@ -226,7 +226,8 @@ app.route("/api/compose")
   let type = req.body.type;
   let content = req.body.content;
   let imgURL = req.body.imgURL;  
-  console.log(type, content, imgURL, title);
+  let rating = req.body.rating;  
+  console.log(type, content, imgURL, title, rating);
   Item.find({type:type}).sort('id').exec(function(err, found) {
     let id;
     if (found.length > 0) {
@@ -239,7 +240,8 @@ app.route("/api/compose")
       title: title,
       type:type,
       content: content,
-      imgURL: imgURL
+      imgURL: imgURL,
+      rating: rating
     });      
     console.log(item);  
     item.save();
